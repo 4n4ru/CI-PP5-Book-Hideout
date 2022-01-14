@@ -62,6 +62,10 @@ body {
     width: 100%;
 }
 
+.bg-black {
+    background-color: black !important;
+}
+
 /* ------ Media Queries ----- */
 
 /* Slightly larger container on xl screens */
