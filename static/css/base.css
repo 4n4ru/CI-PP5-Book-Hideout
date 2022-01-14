@@ -5,7 +5,7 @@ html {
 body {
     background: url('../../media/homepage_background.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: 100vh;
     color: #555;
     font-family: 'Lato';
 }
@@ -73,6 +73,10 @@ body {
 
 /* Fixed top navbar only on medium and up */
 @media (min-width: 992px) {
+    body {
+        height: calc(100vh - 164px);
+    }
+
     .fixed-top-desktop-only {
         position: fixed;
         top: 0px;
@@ -84,4 +88,16 @@ body {
     .header-container {
         padding-top: 164px;
     }
+}
+
+/* Fit top navigation on smallest screen sizes */
+@media (max-width: 576px) {
+    .navbar {
+        padding: 0.5rem 0.4rem;
+    }
+    .nav-link {
+        padding: 0.5rem 0.4rem;
+        font-size: 0.95rem;
+    }
+    
 }
