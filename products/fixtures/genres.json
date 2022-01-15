@@ -1,0 +1,98 @@
+[
+    {
+        "pk": 1,
+        "model": "products.genres",
+        "fields": {
+            "name": "young_adult",
+            "friendly_name": "Young Adult"
+        }
+    },
+    {
+        "pk": 2,
+        "model": "products.genres",
+        "fields": {
+            "name": "fantasy",
+            "friendly_name": "Fantasy"
+        }
+    },
+    {
+        "pk": 3,
+        "model": "products.genres",
+        "fields": {
+            "name": "childrens",
+            "friendly_name": "Children's"
+        }
+    },
+    {
+        "pk": 4,
+        "model": "products.genres",
+        "fields": {
+            "name": "romance",
+            "friendly_name": "Romance"
+        }
+    },
+    {
+        "pk": 5,
+        "model": "products.genres",
+        "fields": {
+            "name": "suspense",
+            "friendly_name": "Suspense"
+        }
+    },
+    {
+        "pk": 6,
+        "model": "products.genres",
+        "fields": {
+            "name": "classics",
+            "friendly_name": "Classics"
+        }
+    },
+    {
+        "pk": 7,
+        "model": "products.genres",
+        "fields": {
+            "name": "science",
+            "friendly_name": "Science"
+        }
+    },
+    {
+        "pk": 8,
+        "model": "products.genres",
+        "fields": {
+            "name": "history",
+            "friendly_name": "History"
+        }
+    },
+    {
+        "pk": 9,
+        "model": "products.genres",
+        "fields": {
+            "name": "science_fiction",
+            "friendly_name": "Science Fiction"
+        }
+    },
+    {
+        "pk": 10,
+        "model": "products.genres",
+        "fields": {
+            "name": "travel",
+            "friendly_name": "Travel"
+        }
+    },
+    {
+        "pk": 11,
+        "model": "products.genres",
+        "fields": {
+            "name": "business",
+            "friendly_name": "Business"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "products.genres",
+        "fields": {
+            "name": "historical_fiction",
+            "friendly_name": "Historical Fiction"
+        }
+    }
+]
