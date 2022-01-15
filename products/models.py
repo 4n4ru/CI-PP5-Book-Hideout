@@ -62,9 +62,7 @@ class Product(models.Model):
     publisher = models.CharField(
         max_length=254
     )
-    publication_date = models.DateField(
-        verbose_name='publication date'
-    )
+    publication_date = models.DateField()
     format = models.CharField(
         max_length=254
     )
