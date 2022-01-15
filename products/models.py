@@ -39,7 +39,6 @@ class Product(models.Model):
     """
     genre = models.ManyToManyField(
         'Genre',
-        null=True,
         blank=True,
     )
     isbn = models.CharField(
