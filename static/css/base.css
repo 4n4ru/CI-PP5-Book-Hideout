@@ -62,8 +62,23 @@ body {
     width: 100%;
 }
 
+.white-overlay {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
 .bg-black {
     background-color: black !important;
+}
+
+.product-img {
+    height: 300px;
+    width: auto;
 }
 
 /* ------ Media Queries ----- */

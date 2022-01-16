@@ -16,7 +16,7 @@ class ProductAdmin(admin.ModelAdmin):
         'image',
     )
 
-    ordering = ('authors',)
+    ordering = ('authors', 'title')
 
 class GenreAdmin(admin.ModelAdmin):
     list_display = (

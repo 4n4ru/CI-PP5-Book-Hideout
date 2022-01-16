@@ -1,4 +1,6 @@
-# Models for the products app
+"""
+Models for the products app
+"""
 
 from django.db import models
 

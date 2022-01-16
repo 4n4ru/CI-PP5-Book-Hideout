@@ -26,7 +26,7 @@ class AllProducts(View):
         products = Product.objects.all()
         
         context = {
-            'products': products, 
+            'products': products,
         }
 
         return render(request, 'products/products.html', context)
