@@ -27,30 +27,30 @@
                 Fiction
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="fiction-link">
-                <a href="" class="dropdown-item">Young Adult</a>
-                <a href="" class="dropdown-item">Sci-Fi and Fantasy</a>
-                <a href="" class="dropdown-item">Suspense</a>
-                <a href="" class="dropdown-item">Romance</a>
-                <a href="" class="dropdown-item">Historical Fiction</a>
-                <a href="" class="dropdown-item">Classics</a>
+                <a href="{% url 'products' %}?genre=young_adult" class="dropdown-item">Young Adult</a>
+                <a href="{% url 'products' %}?genre=science_fiction,fantasy" class="dropdown-item">Sci-Fi and Fantasy</a>
+                <a href="{% url 'products' %}?genre=suspense" class="dropdown-item">Suspense</a>
+                <a href="{% url 'products' %}?genre=romance" class="dropdown-item">Romance</a>
+                <a href="{% url 'products' %}?genre=historical_fiction" class="dropdown-item">Historical Fiction</a>
+                <a href="{% url 'products' %}?genre=classics" class="dropdown-item">Classics</a>
             </div>
         </li>
         <!-- Non-Fiction -->
         <li class="nav-item dropdown">
             <a href="#" class="logo-font font-weight-bold nav-link text-black mr-5" id="non-fiction-link"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                All Books
+                Non Fiction
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="non-fiction-link">
-                <a href="" class="dropdown-item">Business</a>
-                <a href="" class="dropdown-item">Science</a>
-                <a href="" class="dropdown-item">History</a>
-                <a href="" class="dropdown-item">Travel</a>
+                <a href="{% url 'products' %}?genre=business" class="dropdown-item">Business</a>
+                <a href="{% url 'products' %}?genre=science" class="dropdown-item">Science</a>
+                <a href="{% url 'products' %}?genre=history" class="dropdown-item">History</a>
+                <a href="{% url 'products' %}?genre=travel" class="dropdown-item">Travel</a>
             </div>
         </li>
         <!-- Children's -->
         <li class="nav-item">
-            <a href="#" class="logo-font font-weight-bold nav-link text-black mr-5">
+            <a href="{% url 'products' %}?genre=childrens" class="logo-font font-weight-bold nav-link text-black mr-5">
                 Children's
             </a>
         </li>

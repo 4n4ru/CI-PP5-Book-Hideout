@@ -49,11 +49,11 @@
                 <!-- Displaying genres as a comma separated list  -->
                     {% for genre in product.genre.all %}
                         {% if forloop.last %}
-                            <a class="text-muted" href="">
+                            <a class="text-muted" href="{% url 'products' %}?genre={{ genre.name }}">
                                 {{ genre.friendly_name }}
                             </a>
                         {% else %}
-                            <a class="text-muted" href="">
+                            <a class="text-muted" href="{% url 'products' %}?genre={{ genre.name }}">
                                 {{ genre.friendly_name }}
                             </a>, 
                         {% endif %}

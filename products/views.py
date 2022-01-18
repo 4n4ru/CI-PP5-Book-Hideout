@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.db.models import Q
 
 # Internal:
-from .models import Product
+from .models import Product, Genre
 
 
 class AllProducts(View):
@@ -27,8 +27,15 @@ class AllProducts(View):
 
         products = Product.objects.all()
         query = None
+        genres = None
 
         if request.GET:
+            if 'genre' in request.GET:
+                genres = request.GET['genre'].split(',')
+                products = products.filter(genre__name__in=genres)
+                genres = Genre.objects.filter(name__in=genres)
+
+
             if 'q' in request.GET:
                 query = request.GET['q']
                 if not query:
@@ -50,6 +57,7 @@ class AllProducts(View):
         context = {
             'products': products,
             'search_term': query,
+            'current_genres': genres,
         }
 
         return render(request, 'products/products.html', context)
