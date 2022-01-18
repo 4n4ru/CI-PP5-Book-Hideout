@@ -49,7 +49,7 @@ class ProductDetails(View):
         """
 
         product = get_object_or_404(Product, pk=product_id)
-        
+
         context = {
             'product': product,
         }
