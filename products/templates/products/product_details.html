@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="white-overlay"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-5 col-lg-3 justify-content-lg-center d-flex">
+            <div class="image-container my-5">
+                {% if product.image %}
+                    <a href="{{ product.image.url }}" target="_blank">
+                        <img src="{{ product.image.url }}" alt="Book cover for {{ product.title }} by {{ product.authors }}" class="product-img card-img-top img-fluid">
+                    </a>
+                {% else %}
+                    <a href="">
+                        <img src="{{ MEDIA_URL }}.noimage.png" alt="Book cover for {{ product.title }} by {{ product.authors }}" class="product-img card-img-top img-fluid">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-12 col-md-7 col-lg-3">
+            <div class="product-details-container mb-md-5 mt-md-5">
+                <h2 class="mb-0"><strong>{{ product.title }}</strong></h2>
+                <p class="mb-0">by {{ product.authors }}</p>
+                <p><strong>format:</strong>{{ product.format }}</p>
+                {% if product.rating %}
+                    <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5 </small>
+                {% else %}
+                    <small class="text-muted">No rating</small>
+                {% endif %}
+                <p class="lead text-left font-weight-bold">${{ product.price}}</p>
+            </div>
+        </div>
+        <hr class="w-100 d-lg-none">
+        <div class="col-12 col-lg-6 mb-5 mt-3 mt-md-5 pr-5">
+            <p class="mb-0"><strong>Publication: </strong>{{ product.publisher}}, {{ product.publication_date }}</p>
+            <p class="mb-0"><strong>ISBN / ISBN13: </strong>{{ product.isbn }} / {{ product.isbn13 }} </p>
+            <p class="mb-0"><strong>Pages: </strong>{{ product.pages }}</p>
+            <p class="mb-0"><strong>Genre: </strong> 
+                {% if product.genre %}
+                <!-- Displaying genres as a comma separated list  -->
+                    {% for genre in product.genre.all %}
+                        {% if forloop.last %}
+                            <a class="text-muted" href="">
+                                {{ genre.friendly_name }}
+                            </a>
+                        {% else %}
+                            <a class="text-muted" href="">
+                                {{ genre.friendly_name }}
+                            </a>, 
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </p>
+            <p class="mb-0 mt-3"><strong>Description:</strong></p>
+            <p>{{ product.description }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
