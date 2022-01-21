@@ -36,9 +36,15 @@ class AllProducts(View):
             if 'sort' in request.GET:
                 sortkey = request.GET['sort']
                 sort = sortkey
-                if sortkey == 'name':
-                    sortkey = 'lower_name'
-                    products = products.annotate(lower_name=Lower('name'))
+                if sortkey == 'title':
+                    sortkey = 'lower_title'
+                    products = products.annotate(lower_title=Lower('title'))
+
+                if sortkey == 'author':
+                    sortkey = 'lower_authors'
+                    products = products.annotate(
+                        lower_authors=Lower('authors')
+                    )
 
                 if 'direction' in request.GET:
                     direction = request.GET['direction']
