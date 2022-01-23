@@ -94,6 +94,11 @@ body {
     width: auto;
 }
 
+.img-bag {
+    height: 100px;
+    width: auto;
+}
+
 .btt-button {
     height: 42px;
     width: 42px;
@@ -104,6 +109,11 @@ body {
 
 .btt-link {
     cursor: pointer;
+}
+
+/* to exempt elements from hover option */
+.no-hover:hover {
+    background: none !important;
 }
 
 /* ------ Media Queries ----- */
