@@ -5,4 +5,6 @@
 
  # Data
 - book data was mostly taken from a dataset at Kaggle (https://www.kaggle.com/yamqwe/bulk-bookstore-dataset), other data was added manually from Goodreads (https://goodreads.com) and Amazon (https://www.amazon.co.uk/)
-  
+
+# Code
+- Remove Arrows/Spinners from input type number - code taken from https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp

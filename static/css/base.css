@@ -116,6 +116,47 @@ body {
     background: none !important;
 }
 
+/* stack quantity buttons in a vertical group */
+.qty-btns {
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.qty-btns button {
+    height: 50%;
+    font-size: 0.5rem;
+    padding: 0 0.25rem;
+}
+
+.qty-btns>button:not(:last-child) {
+    border-bottom: 1px solid white;
+}
+
+.qty-btns>button:last-child {
+    border-top: 1px solid white;
+}
+
+.qty-btns .icon {
+    height: 1rem;
+    width: 1rem;
+}
+
+.qty_input {
+    text-align: center;
+}
+
+/* Remove Arrows/Spinners from input type number - code taken from https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 /* ------ Media Queries ----- */
 
 /* Slightly larger container on xl screens */
