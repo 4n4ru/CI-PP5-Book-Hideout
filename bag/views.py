@@ -1,6 +1,6 @@
 # Imports:
 # 3rd party:
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, HttpResponse
 from django.views import View
 
 # Internal:
@@ -21,6 +21,7 @@ class Bag(View):
             method: renders shopping bag page
         """
         return render(request, 'bag/bag.html')
+
 
 class AddToBag(View):
     """Adding items to bag
@@ -49,3 +50,57 @@ class AddToBag(View):
 
         request.session['bag'] = bag
         return redirect(redirect_url)
+
+
+class AdjustBag(View):
+    """Adjusting the quantity of specific item in bag
+
+    Args:
+        View (class): Built in parent class for views
+    """
+    def post(self, request, item_id):
+        """Adjusting quantity of specific item in bag,
+        if the quantity is set to 0 remove the item 
+
+        Args:
+            request (object): HTTP request object
+            item_id (int): id of product being adjusted
+
+        Returns:
+            method: redirects back to the bag
+        """
+        quantity = int(request.POST.get('quantity'))
+        bag = request.session.get('bag', {})
+        
+        try:
+            if quantity > 0:
+                bag[item_id] = quantity
+            else:
+                bag.pop(item_id)
+
+            request.session['bag'] = bag
+            return redirect(reverse('bag'))
+
+        except Exception as e:
+            return HttpResponse(status=500)
+
+class RemoveFromBag(View):
+    """Remove the specific item from the bag
+
+    Args:
+        View (class): Built in parent class for views
+    """
+    def post(self, request, item_id):
+        """Remove the specific item from the bag
+
+        Args:
+            request (object): HTTP request object
+            item_id (int): id of product being removed
+
+        Returns:
+            method: redirects back to the bag
+        """
+        bag = request.session.get('bag', {})
+        bag.pop(item_id)
+        request.session['bag'] = bag
+        return HttpResponse(status=200)
