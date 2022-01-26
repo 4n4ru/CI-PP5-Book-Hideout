@@ -28,7 +28,7 @@
             </div>
         </div>
         <!-- Important details and add to bag button -->
-        <div class="col-12 col-md-7 col-lg-3">
+        <div class="col-12 col-md-7 col-lg-4">
             <div class="product-details-container mb-md-5 mt-md-5">
                 <h2 class="mb-0"><strong>{{ product.title }}</strong></h2>
                 <p class="mb-0">by {{ product.authors }}</p>
@@ -63,14 +63,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 mt-5">
+                    <div class="col-12 mt-5">
+                        <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0">
                             <span class="icon">
                                 <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="text-uppercase">Keep shopping</span>
                         </a>
-                        <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Basket">
+                        <input type="submit" class="btn btn-black rounded-0 text-uppercase" value="Add to Basket">
                     </div>
                     <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 </div>
@@ -78,7 +78,7 @@
         </div>
         <hr class="w-100 d-lg-none">
         <!-- More details about the product -->
-        <div class="col-12 col-lg-6 mb-5 mt-3 mt-md-5 pr-5">
+        <div class="col-12 col-lg-5 mb-5 mt-3 mt-md-5 pr-5">
             <p class="mb-0"><strong>Publication: </strong>{{ product.publisher}}, {{ product.publication_date }}</p>
             <p class="mb-0"><strong>ISBN / ISBN13: </strong>{{ product.isbn }} / {{ product.isbn13 }} </p>
             <p class="mb-0"><strong>Pages: </strong>{{ product.pages }}</p>
