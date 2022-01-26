@@ -2,8 +2,10 @@
 # 3rd party:
 from django.shortcuts import render, redirect, reverse, HttpResponse
 from django.views import View
+from django.contrib import messages
 
 # Internal:
+from products.models import Product
 
 class Bag(View):
     """A view to display the shopping bag page
@@ -39,6 +41,7 @@ class AddToBag(View):
         Returns:
             method: redirects back to the redirect_url passed into the form
         """
+        product = Product.objects.get(pk=item_id)
         quantity = int(request.POST.get('quantity'))
         redirect_url = request.POST.get('redirect_url')
         bag = request.session.get('bag', {})
@@ -47,6 +50,11 @@ class AddToBag(View):
             bag[item_id] += quantity
         else:
             bag[item_id] = quantity
+            messages.success(
+                request,
+                f'{product.title} by {product.authors}'\
+                    'was added to your basket.'
+            )
 
         request.session['bag'] = bag
         return redirect(redirect_url)
