@@ -25,7 +25,6 @@ class AllProducts(View):
         Returns:
             method: renders products page
         """
-
         products = Product.objects.all()
         query = None
         genres = None
