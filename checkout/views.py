@@ -22,7 +22,7 @@ class CacheCheckoutData(View):
 
     Args:
         View (class): Built in parent class for views
-    """    
+    """
     def post(self, request):
         """Cache checkout data for the user
 
@@ -31,7 +31,7 @@ class CacheCheckoutData(View):
 
         Returns:
             HttpResponse
-        """       
+        """
         try:
             pid = request.POST.get('client_secret').split('_secret')[0]
             stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -124,14 +124,18 @@ class Checkout(View):
         }
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            order = order_form.save()
-            for item_id in bag.items():
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_bag = json.dumps(bag)
+            order.save()
+            for item_id, quantity in bag.items():
                 try:
                     product = Product.objects.get(id=item_id[0])
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
-                        quantity=item_id[1],
+                        quantity=quantity,
                     )
                     order_line_item.save()
                 except Product.DoesNotExist:
