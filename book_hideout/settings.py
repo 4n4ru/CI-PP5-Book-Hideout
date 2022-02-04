@@ -43,7 +43,7 @@ else:
     ALLOWED_HOSTS = [
         '127.0.0.1',
         'localhost',
-        'https://ci-pp5-bookhideout.herokuapp.com/'
+        'ci-pp5-bookhideout.herokuapp.com/'
     ]
     # Email
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
