@@ -1,17 +1,50 @@
 # Imports:
 # 3rd party:
-from django.shortcuts import render, reverse, redirect, get_object_or_404
+from django.shortcuts import render, reverse, redirect, get_object_or_404,\
+    HttpResponse
+from django.views.decorators.http import require_POST
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib import messages
 from django.conf import settings
-
 import stripe
+import json
 
 # Internal:
 from bag.contexts import bag_contents
 from products.models import Product
 from .models import OrderLineItem, Order
 from .forms import OrderForm
+
+@method_decorator(require_POST, name='dispatch')
+class CacheCheckoutData(View):
+    """A view to cache checkout data for the user, requires a POST method
+
+    Args:
+        View (class): Built in parent class for views
+    """    
+    def post(self, request):
+        """Cache checkout data for the user
+
+        Args:
+            request (object): request object
+
+        Returns:
+            HttpResponse
+        """       
+        try:
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            stripe.PaymentIntent.modify(pid, metadata={
+                'bag': json.dumps(request.session.get('bag', {})),
+                'save_info': request.POST.get('save_info'),
+                'username': request.user,
+            })
+            return HttpResponse(status=200)
+        except Exception as e:
+            messages.error(request, 'Sorry, your payment cannot be \
+                processed right now. Please try again later.')
+            return HttpResponse(content=e, status=400)
 
 
 class Checkout(View):
