@@ -9,6 +9,16 @@
     border: 1px solid black;
 }
 
+select,
+select option {
+  color: black;
+}
+
+select:invalid,
+select option[value=""] {
+  color: #aab7c4 !important;
+}
+
 .StripeElement,
 .stripe-style-input {
   box-sizing: border-box;
