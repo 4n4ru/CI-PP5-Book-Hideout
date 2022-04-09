@@ -5,6 +5,7 @@ from django.views import View
 
 # Internal:
 from .models import UserProfile
+from .forms import USerProfileForm
 
 
 class Profile(View):
@@ -23,9 +24,14 @@ class Profile(View):
             method: renders profile page
         """
         profile = get_object_or_404(UserProfile, user=request.user)
+
+        form = USerProfileForm(instance=profile)
+        orders = profile.orders.all()
+
         template = 'profiles/profile.html'
         context = {
-            'profile': profile,
+            'form': form,
+            'orders': orders,
         }
 
         return render(request, template, context)
