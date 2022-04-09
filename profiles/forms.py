@@ -6,7 +6,7 @@ from django import forms
 from .models import UserProfile
 
 
-class USerProfileForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
     """Order form class
     """    
     class Meta:
