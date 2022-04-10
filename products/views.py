@@ -8,6 +8,7 @@ from django.db.models.functions import Lower
 
 # Internal:
 from .models import Product, Genre
+from .forms import ProductForm
 
 
 class AllProducts(View):
@@ -110,3 +111,27 @@ class ProductDetails(View):
         }
 
         return render(request, 'products/product_details.html', context)
+
+
+class AddProduct(View):
+    """A view to display add product template and add products to database
+
+    Args:
+        View (class): Built in parent class for views
+    """
+    def get(self, request):
+        """Renders add product form
+
+        Args:
+            request (object): HTTP request object
+
+        Returns:
+            method: renders add product form
+        """        
+        form = ProductForm()
+        template = 'products/add_product.html'
+        context = {
+            'form': form
+        }
+
+        return render(request, template, context)
