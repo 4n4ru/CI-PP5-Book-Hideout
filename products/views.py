@@ -119,6 +119,12 @@ class AddProduct(View):
     Args:
         View (class): Built in parent class for views
     """
+    form = ProductForm()
+    template = 'products/add_product.html'
+    context = {
+        'form': form,
+    }
+
     def get(self, request):
         """Renders add product form
 
@@ -127,11 +133,26 @@ class AddProduct(View):
 
         Returns:
             method: renders add product form
-        """        
-        form = ProductForm()
-        template = 'products/add_product.html'
-        context = {
-            'form': form
-        }
+        """       
+        return render(request, self.template, self.context)
 
-        return render(request, template, context)
+    def post(self, request):
+        """Handles post method of add product form
+
+        Args:
+            request (object): HTTP request object
+
+        Returns:
+            method: redirects back to add product page
+        """ 
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'The book was successfully added')
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(
+                request,
+                'Failed to add product. Please ensure the form is valid'
+            )
+            return render(request, self.template, {'form':form})

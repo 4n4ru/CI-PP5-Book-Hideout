@@ -38,7 +38,11 @@
                                 <tr>
                                     <td class="p-3">
                                         <a href="{% url 'product_details' item.product.id %}">
+                                            {% if item.product.image %}
                                             <img class="img-bag img-fluid rounded" src="{{ item.product.image.url }}">
+                                            {% else %}
+                                            <img class="img-bag img-fluid rounded" src="{{ MEDIA_URL }}noimage.png">
+                                            {% endif %}
                                         </a>
                                     </td>
                                     <td class="py-3">
