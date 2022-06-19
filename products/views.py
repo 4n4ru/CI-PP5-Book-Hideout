@@ -147,9 +147,9 @@ class AddProduct(View):
         """
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            product = form.save()
             messages.success(request, 'The book was successfully added')
-            return redirect(reverse('add_product'))
+            return redirect(reverse('product_details', args=[product.id]))
         else:
             messages.error(
                 request,
@@ -159,7 +159,7 @@ class AddProduct(View):
 
 
 class EditProduct(View):
-    """A view to display add product template and add products to database
+    """A view to display edit product template and edit products in database
 
     Args:
         View (class): Built in parent class for views
@@ -212,3 +212,29 @@ class EditProduct(View):
                 'Failed to update book. Please ensure the form is valid'
             )
             return render(request, self.template, {'form':form})
+
+
+class DeleteProduct(View):
+    """A view to delete products from database
+
+    Args:
+        View (class): Built in parent class for views
+    """
+    template = 'products/delete_product.html'
+
+    def get(self, request, product_id):
+        """Renders delete product form
+
+        Args:
+            request (object): HTTP request object
+
+        Returns:
+            method: redirects to product page
+        """
+        product = get_object_or_404(Product, pk=product_id)
+        product.delete()
+        messages.success(
+            request,
+            f'You deleted {product.title} by {product.authors}'
+        )
+        return redirect(reverse('products'))

@@ -22,4 +22,10 @@ urlpatterns = [
         views.EditProduct.as_view(),
         name='edit_product'
     ),
+    path(
+        'delete/<int:product_id>/',
+        views.DeleteProduct.as_view(),
+        name='delete_product'
+    ),
+    
 ]
