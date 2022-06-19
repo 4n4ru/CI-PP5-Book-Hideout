@@ -75,7 +75,7 @@ class AllProducts(View):
                 )
 
                 products = products.filter(queries)
-        
+
         current_sorting = f'{sort}_{direction}'
 
         context = {
@@ -133,7 +133,7 @@ class AddProduct(View):
 
         Returns:
             method: renders add product form
-        """       
+        """
         return render(request, self.template, self.context)
 
     def post(self, request):
@@ -144,7 +144,7 @@ class AddProduct(View):
 
         Returns:
             method: redirects back to add product page
-        """ 
+        """
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -154,5 +154,61 @@ class AddProduct(View):
             messages.error(
                 request,
                 'Failed to add product. Please ensure the form is valid'
+            )
+            return render(request, self.template, {'form':form})
+
+
+class EditProduct(View):
+    """A view to display add product template and add products to database
+
+    Args:
+        View (class): Built in parent class for views
+    """
+    template = 'products/edit_product.html'
+
+    def get(self, request, product_id):
+        """Renders edit product form
+
+        Args:
+            request (object): HTTP request object
+
+        Returns:
+            method: renders edit product form
+        """
+        product = get_object_or_404(Product, pk=product_id)
+        form = ProductForm(instance=product)
+        messages.info(
+            request,
+            f'You are editing the book {product.title} by {product.authors}'
+        )
+        context = {
+            'form':form,
+            'product': product,
+        }
+        return render(request, self.template, context)
+
+    def post(self, request, product_id):
+        """Handles post method of edit product form
+
+        Args:
+            request (object): HTTP request object
+
+        Returns:
+            method: redirects back to product page
+        """
+        product = get_object_or_404(Product, pk=product_id)
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                f'The book {product.title} by \
+                    {product.authors} was successfully updated'
+            )
+            return redirect(reverse('product_details', args=[product.id]))
+        else:
+            messages.error(
+                request,
+                'Failed to update book. Please ensure the form is valid'
             )
             return render(request, self.template, {'form':form})
