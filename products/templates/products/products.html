@@ -91,6 +91,16 @@
                                         {% endif %}
                                     </div>
                                 </div>
+                                <div>
+                                    {% if request.user.is_superuser %}
+                                        <a href="{% url 'edit_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                                            <span class="icon text-muted"><i class="fas fa-pen"></i></span>
+                                        </a>
+                                        <a href="{% url 'delete_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                                            <span class="icon text-danger"><i class="fas fa-trash"></i></span>
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -162,6 +172,13 @@
 
                 window.location.replace(currentUrl);
             }
+        })
+    </script>
+
+    <!-- tooltip -->
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
 {% endblock %}

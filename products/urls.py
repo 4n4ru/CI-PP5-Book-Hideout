@@ -27,5 +27,4 @@ urlpatterns = [
         views.DeleteProduct.as_view(),
         name='delete_product'
     ),
-    
 ]

@@ -40,6 +40,16 @@
                 {% endif %}
                 <p class="lead text-left font-weight-bold">${{ product.price}}</p>
             </div>
+            <div>
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'edit_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                        <span class="icon text-muted"><i class="fas fa-pen"></i></span>
+                    </a>
+                    <a href="{% url 'delete_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Delete">
+                        <span class="icon text-danger"><i class="fas fa-trash"></i></span>
+                    </a>
+                {% endif %}
+            </div>
             <form action="{% url 'add_to_bag' product.id %}" class="form" method="POST">
                 {% csrf_token %}
                 <div class="form-row">
@@ -106,6 +116,12 @@
 {% endblock %}
 
 {% block postloadjs %}
-{{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
+    <!-- tooltip -->
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 {% endblock %}
