@@ -3,14 +3,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Internal:
 from checkout.models import Order
 from .models import UserProfile
 from .forms import UserProfileForm
 
-
-class Profile(View):
+class Profile(LoginRequiredMixin, View):
     """A view to display the profile page
 
     Args:

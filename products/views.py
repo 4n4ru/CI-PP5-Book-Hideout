@@ -5,11 +5,20 @@ from django.views import View
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Internal:
 from .models import Product, Genre
 from .forms import ProductForm
 
+class SuperUserMixin(LoginRequiredMixin, UserPassesTestMixin):
+
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def handle_no_permission(self):
+        messages.info(self.request, 'Ooops! Only an Admin can to that!')
+        return redirect(reverse('home'))
 
 class AllProducts(View):
     """A view to display the products page, including sorting and search queries
@@ -113,7 +122,7 @@ class ProductDetails(View):
         return render(request, 'products/product_details.html', context)
 
 
-class AddProduct(View):
+class AddProduct(SuperUserMixin, View):
     """A view to display add product template and add products to database
 
     Args:
@@ -158,7 +167,7 @@ class AddProduct(View):
             return render(request, self.template, {'form':form})
 
 
-class EditProduct(View):
+class EditProduct(SuperUserMixin, View):
     """A view to display edit product template and edit products in database
 
     Args:
@@ -214,7 +223,7 @@ class EditProduct(View):
             return render(request, self.template, {'form':form})
 
 
-class DeleteProduct(View):
+class DeleteProduct(SuperUserMixin, View):
     """A view to delete products from database
 
     Args:
