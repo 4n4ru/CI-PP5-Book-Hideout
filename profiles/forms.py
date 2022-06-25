@@ -8,12 +8,12 @@ from .models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
     """Order form class
-    """    
+    """
     class Meta:
         model = UserProfile()
         exclude = ('user',)
 
-    def __init__(self, *args, **kwargs):     
+    def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
         labels and set autofocus on first field

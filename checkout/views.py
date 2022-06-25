@@ -18,6 +18,7 @@ from profiles.models import UserProfile
 from .models import OrderLineItem, Order
 from .forms import OrderForm
 
+
 @method_decorator(require_POST, name='dispatch')
 class CacheCheckoutData(View):
     """A view to cache checkout data for the user, requires a POST method
@@ -101,7 +102,7 @@ class Checkout(View):
                 order_form = OrderForm()
         else:
             order_form = OrderForm()
-            
+
         if not stripe_public_key:
             messages.warning(
                 request,
@@ -117,7 +118,6 @@ class Checkout(View):
         }
 
         return render(request, template, context)
-
 
     def post(self, request):
         """Handle the checkout form post request,
@@ -162,7 +162,7 @@ class Checkout(View):
                 except Product.DoesNotExist:
                     messages.error(
                         request,
-                        "One of the products in your basket wasn't found\
+                        "One of the products in your basket wasn't found \
                         in our database. Please call us for assistance!"
                     )
                     order.delete()
@@ -170,7 +170,7 @@ class Checkout(View):
             request.session['save_info'] = 'save_info' in request.POST
             return redirect(reverse(
                 'checkout_success',
-                args = [order.order_number]
+                args=[order.order_number]
             ))
         else:
             messages.error(
@@ -186,7 +186,7 @@ class CheckoutSuccess(View):
     Args:
         View (class): Built in parent class for views
     """
-    def get (self, request, order_number):
+    def get(self, request, order_number):
         """
         Handle successful checkouts
         """

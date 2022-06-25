@@ -7,6 +7,7 @@ from decimal import Decimal
 # Internal:
 from products.models import Product
 
+
 def bag_contents(request):
     """Context processor for the bag content
 

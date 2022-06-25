@@ -13,7 +13,6 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
-
     image = forms.ImageField(
         label='Image',
         required=False,
@@ -38,10 +37,9 @@ class ProductForm(forms.ModelForm):
         self.fields['genre'].choices = queryset
         for field_name, field in self. fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
-        self.fields['isbn'].widget.attrs['pattern']='\d{9}[\dX]'
-        self.fields['isbn'].widget.attrs['title']='Please enter a valid ISBN.'
-        self.fields['isbn13'].widget.attrs['pattern']='\d{13}'
-        self.fields['isbn13'].widget.attrs['title']='Please enter a valid ISBN13.'
-
-
-
+        self.fields['isbn'].widget.attrs['pattern'] = r'\d{9}[\dX]'
+        self.fields['isbn'].widget.attrs['title'] = 'Please enter a valid \
+            ISBN.'
+        self.fields['isbn13'].widget.attrs['pattern'] = r'\d{13}'
+        self.fields['isbn13'].widget.attrs['title'] = 'Please enter a valid \
+            ISBN13.'

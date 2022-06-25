@@ -28,7 +28,6 @@ class StripeWH_Handler:
             status=200
         )
 
-
     def _send_confirmation_email(self, order):
         """Send the user a confirmation email"""
         cust_email = order.email
@@ -45,7 +44,6 @@ class StripeWH_Handler:
             settings.DEFAULT_FROM_EMAIL,
             [cust_email]
         )
-
 
     def handle_payment_intent_succeeded(self, event):
         """
@@ -74,8 +72,10 @@ class StripeWH_Handler:
                 profile.default_country = shipping_details.address.country
                 profile.default_postcode = shipping_details.address.postal_code
                 profile.default_town_or_city = shipping_details.address.city
-                profile.default_street_address1 = shipping_details.address.line1
-                profile.default_street_address2 = shipping_details.address.line2
+                profile.default_street_address1 = shipping_details.address\
+                    .line1
+                profile.default_street_address2 = shipping_details.address\
+                    .line2
                 profile.default_county = shipping_details.address.state
                 profile.save()
 
@@ -156,4 +156,3 @@ class StripeWH_Handler:
             content=f'Webhook received: {event["type"]}',
             status=200
         )
-        

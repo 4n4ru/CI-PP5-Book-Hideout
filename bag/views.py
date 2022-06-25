@@ -8,6 +8,7 @@ from django.contrib import messages
 # Internal:
 from products.models import Product
 
+
 class Bag(View):
     """A view to display the shopping bag page
 
@@ -51,15 +52,15 @@ class AddToBag(View):
             bag[item_id] += quantity
             messages.success(
                 request,
-                f'Updated {product.title} by {product.authors}'\
-                    f'quantity to {bag[item_id]}'
+                f'Updated {product.title} by {product.authors} '
+                f'quantity to {bag[item_id]}'
             )
         else:
             bag[item_id] = quantity
             messages.success(
                 request,
-                f'{product.title} by {product.authors}'\
-                    'was added to your basket.'
+                f'{product.title} by {product.authors} '
+                'was added to your basket.'
             )
 
         request.session['bag'] = bag
@@ -91,19 +92,20 @@ class AdjustBag(View):
             bag[item_id] = quantity
             messages.success(
                 request,
-                f'Updated {product.title} by {product.authors}'\
-                    f'quantity to {bag[item_id]}'
+                f'Updated {product.title} by {product.authors} '
+                f'quantity to {bag[item_id]}'
             )
         else:
             bag.pop(item_id)
             messages.success(
                 request,
-                f'{product.title} by {product.authors}'\
-                    'was removed from your basket.'
+                f'{product.title} by {product.authors} '
+                'was removed from your basket.'
             )
 
         request.session['bag'] = bag
         return redirect(reverse('bag'))
+
 
 class RemoveFromBag(View):
     """Remove the specific item from the bag
@@ -127,8 +129,8 @@ class RemoveFromBag(View):
             bag.pop(item_id)
             messages.success(
                 request,
-                f'{product.title} by {product.authors}'\
-                    'was removed from your basket.'
+                f'{product.title} by {product.authors} '
+                'was removed from your basket.'
             )
             request.session['bag'] = bag
             return HttpResponse(status=200)

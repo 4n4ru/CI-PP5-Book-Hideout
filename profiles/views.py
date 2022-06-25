@@ -10,6 +10,7 @@ from checkout.models import Order
 from .models import UserProfile
 from .forms import UserProfileForm
 
+
 class Profile(LoginRequiredMixin, View):
     """A view to display the profile page
 
@@ -56,6 +57,7 @@ class Profile(LoginRequiredMixin, View):
 
         return redirect('profile')
 
+
 class OrderHistory(View):
     """A view to display the order history page
 
@@ -76,8 +78,8 @@ class OrderHistory(View):
 
         messages.info(
             request,
-            (f'This is a past confirmation for order number {order_number}. '
-            'A confirmation email was sent on the order date.')
+            f'This is a past confirmation for order number {order_number}. \
+            A confirmation email was sent on the order date.'
         )
         template = 'checkout/checkout_success.html'
         context = {

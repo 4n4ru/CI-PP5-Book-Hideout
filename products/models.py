@@ -1,9 +1,7 @@
 """
 Models for the products app
 """
-
 from django.db import models
-from django.core.validators import MinLengthValidator
 
 
 class Genre(models.Model):
@@ -28,7 +26,7 @@ class Genre(models.Model):
         return f'{self.name}'
 
     def get_friendly_name(self):
-        """Retruns the genres front end friendly name
+        """Returns the genres front end friendly name
 
         Returns:
             string: front end friendly name

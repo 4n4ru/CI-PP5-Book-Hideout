@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Product, Genre
 from .forms import ProductForm
 
+
 class SuperUserMixin(LoginRequiredMixin, UserPassesTestMixin):
     """A Mixin for checking if a logged in user is a superuser and
     handling no permission error. If the user is not a superuser they are
@@ -31,6 +32,7 @@ class SuperUserMixin(LoginRequiredMixin, UserPassesTestMixin):
     def handle_no_permission(self):
         messages.info(self.request, 'Ooops! Only an Admin can to that!')
         return redirect(reverse('home'))
+
 
 class AllProducts(View):
     """A view to display the products page, including sorting and search queries
@@ -77,7 +79,6 @@ class AllProducts(View):
                 genres = request.GET['genre'].split(',')
                 products = products.filter(genre__name__in=genres)
                 genres = Genre.objects.filter(name__in=genres)
-
 
             if 'q' in request.GET:
                 query = request.GET['q']
@@ -176,7 +177,7 @@ class AddProduct(SuperUserMixin, View):
                 request,
                 'Failed to add product. Please ensure the form is valid'
             )
-            return render(request, self.template, {'form':form})
+            return render(request, self.template, {'form': form})
 
 
 class EditProduct(SuperUserMixin, View):
@@ -203,7 +204,7 @@ class EditProduct(SuperUserMixin, View):
             f'You are editing the book {product.title} by {product.authors}'
         )
         context = {
-            'form':form,
+            'form': form,
             'product': product,
         }
         return render(request, self.template, context)
@@ -232,7 +233,7 @@ class EditProduct(SuperUserMixin, View):
                 request,
                 'Failed to update book. Please ensure the form is valid'
             )
-            return render(request, self.template, {'form':form})
+            return render(request, self.template, {'form': form})
 
 
 class DeleteProduct(SuperUserMixin, View):

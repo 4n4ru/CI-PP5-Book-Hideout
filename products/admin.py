@@ -18,11 +18,13 @@ class ProductAdmin(admin.ModelAdmin):
 
     ordering = ('authors', 'title')
 
+
 class GenreAdmin(admin.ModelAdmin):
     list_display = (
         'friendly_name',
         'name',
     )
+
 
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
