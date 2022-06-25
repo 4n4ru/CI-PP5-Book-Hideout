@@ -3,6 +3,7 @@ Models for the products app
 """
 
 from django.db import models
+from django.core.validators import MinLengthValidator
 
 
 class Genre(models.Model):
@@ -44,10 +45,10 @@ class Product(models.Model):
         blank=True,
     )
     isbn = models.CharField(
-        max_length=254
+        max_length=10,
     )
     isbn13 = models.CharField(
-        max_length=254
+        max_length=13,
     )
     title = models.CharField(
         max_length=254
