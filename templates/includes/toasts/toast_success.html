@@ -15,13 +15,13 @@
             </div>
         </div>
         {% if grand_total and product_count and not on_profile_page %}
-            <p class="bg-white text-black py-1">Your Basket {{ product_count }}</p>
+            <p class="bg-white text-black py-1">Your Basket ({{ product_count }})</p>
             <div class="bag-notification-wrapper">
                 {% for item in bag_items %}
                     <div class="row">
                         <div class="col-3 my-1">
                             {% if item.product.image %}
-                            <img src="{{ item.product.image_url }}" alt="Cover image for {{ item.product.title }} by {{ itm.product.authors }} " class="w-100">
+                            <img src="{{ item.product.image.url }}" alt="Cover image for {{ item.product.title }} by {{ itm.product.authors }} " class="w-100">
                             {% else %}
                             <img src="{{ MEDIA_URL }}noimage.png" alt="Cover image for {{ item.product.title }} by {{ itm.product.authors }} " class="w-100">
                             {% endif %}

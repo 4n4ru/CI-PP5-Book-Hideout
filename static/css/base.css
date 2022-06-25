@@ -229,7 +229,7 @@ input[type=number] {
     overflow-y: auto;
 }
 
-/* Allauth form formating */
+/* Allauth form formatting */
 .allauth-form-inner-content p {
     margin-top: 1.5rem; /* mt-4 */
     color: #6c757d /* text-secondary */;
@@ -309,6 +309,11 @@ input[type=number] {
     border-radius: 0;
 }
 
+/* item quantity form width */
+.qty-w {
+    width: 75%;
+}
+
 /* ------ Media Queries ----- */
 
 /* Slightly larger container on xl screens */
@@ -346,6 +351,21 @@ input[type=number] {
 
     body {
         height: calc(100vh - 135px);
+    }
+    /* item quantity form width on smaller devices */
+    .qty-w {
+        width: 100%;
+    }
+
+    /* match button width for product details page on smaller devices */
+    .btn-w {
+        width: 80%;
+    }
+
+    .btn.btn-outline-black.rounded-0.btn-lg,
+    .btn.btn-black.rounded-0.btn-lg {
+        padding: .375rem .375rem;
+        font-size: .75rem;
     }
 }
 
