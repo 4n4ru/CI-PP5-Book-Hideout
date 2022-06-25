@@ -1,0 +1,30 @@
+<!-- Modal -->
+<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="delete-modal-title"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase" id="delete-modal-title">Delete Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this book?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-black rounded-0 text-uppercase" data-dismiss="modal">No</button>
+                <a href='#' id="yes-btn" class="yes-btn btn btn-black rounded-0 text-uppercase">Yes</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Set Yes button href attribute to correct delete url -->
+<script type="text/javascript">
+    $('#delete-modal'). on('show.bs.modal', function(event){
+        var button = $(event.relatedTarget);
+        var deleteUrl = button.data('delete-url');
+        $('#yes-btn')[0].href = deleteUrl;
+    });
+</script>

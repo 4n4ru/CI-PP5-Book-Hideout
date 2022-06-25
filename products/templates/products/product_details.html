@@ -42,12 +42,12 @@
             </div>
             <div>
                 {% if request.user.is_superuser %}
-                    <a href="{% url 'edit_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                    <a class="edit-link" href="{% url 'edit_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Edit">
                         <span class="icon text-muted"><i class="fas fa-pen"></i></span>
                     </a>
-                    <a href="{% url 'delete_product' product.id %}" data-toggle="tooltip" data-placement="bottom" title="Delete">
-                        <span class="icon text-danger"><i class="fas fa-trash"></i></span>
-                    </a>
+                    <button type="button" class="delete-button border-0 bg-white" data-toggle="modal" data-target="#delete-modal" data-delete-url="{% url 'delete_product' product.id %}">
+                        <span class="icon text-danger" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash"></i></span>
+                    </button>
                 {% endif %}
             </div>
             <form action="{% url 'add_to_bag' product.id %}" class="form" method="POST">
@@ -113,6 +113,7 @@
         </div>
     </div>
 </div>
+{% include 'products/includes/delete_confirmation_modal.html '%}
 {% endblock %}
 
 {% block postloadjs %}

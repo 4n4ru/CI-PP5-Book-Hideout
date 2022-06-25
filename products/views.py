@@ -242,7 +242,6 @@ class DeleteProduct(SuperUserMixin, View):
     Args:
         View (class): Built in parent class for views
     """
-    template = 'products/delete_product.html'
 
     def get(self, request, product_id):
         """Renders delete product form

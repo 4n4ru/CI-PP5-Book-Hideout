@@ -309,6 +309,16 @@ input[type=number] {
     border-radius: 0;
 }
 
+.delete-button:hover,
+.delete-button:focus {
+    outline: 0;
+}
+
+.edit-link:hover,
+.edit-link:focus {
+    text-decoration: none;
+}
+
 /* item quantity form width */
 .qty-w {
     width: 75%;
