@@ -199,6 +199,10 @@ class EditProduct(SuperUserMixin, View):
         """
         product = get_object_or_404(Product, pk=product_id)
         form = ProductForm(request.POST, request.FILES, instance=product)
+        context = {
+            'form': form,
+            'product': product,
+        }
         if form.is_valid():
             form.save()
             messages.success(
@@ -212,7 +216,7 @@ class EditProduct(SuperUserMixin, View):
                 request,
                 'Failed to update book. Please ensure the form is valid'
             )
-            return render(request, self.template, {'form': form})
+            return render(request, self.template, context)
 
 
 class DeleteProduct(SuperUserMixin, View):

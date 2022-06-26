@@ -17,4 +17,9 @@ urlpatterns = [
         views.DeleteSale.as_view(),
         name='delete_sale'
     ),
+    path(
+        'edit/<int:sale_id>/',
+        views.EditSale.as_view(),
+        name='edit_sale'
+    ),
 ]
