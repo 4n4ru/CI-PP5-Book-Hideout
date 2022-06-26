@@ -116,12 +116,12 @@
         </div>
     </div>
 </div>
-{% include 'products/includes/delete_confirmation_modal.html '%}
+{% include "products/includes/delete_confirmation_modal.html" %}
 {% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
-    {% include 'products/includes/quantity_input_script.html' %}
+    {% include "products/includes/quantity_input_script.html" %}
     <!-- tooltip -->
     <script type="text/javascript">
         $(function () {
