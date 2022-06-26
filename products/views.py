@@ -5,12 +5,13 @@ from django.views import View
 from django.contrib import messages
 from django.db.models import Q
 from django.db.models.functions import Lower
-
+from datetime import date
 
 # Internal:
 from .models import Product, Genre
 from .forms import ProductForm
 from book_hideout.mixins import SuperUserMixin
+from sale.models import Sale
 
 
 class AllProducts(View):
@@ -28,54 +29,69 @@ class AllProducts(View):
         Returns:
             method: renders products page
         """
-        products = Product.objects.all()
+        products_query = Product.objects.all()
+        sales = Sale.objects.filter(
+            Q(start_date__lte=date.today())
+            & Q(end_date__gte=date.today())
+        )
+
+        if 'q' in request.GET:
+            query = request.GET['q']
+            if not query:
+                messages.error(
+                    request,
+                    "You didn't enter any search criteria!"
+                )
+                return redirect(reverse('products'))
+
+            queries = (
+                Q(title__icontains=query)
+                | Q(authors__icontains=query)
+                | Q(isbn__icontains=query)
+                | Q(isbn13__icontains=query)
+            )
+
+            products_query = products_query.filter(queries)
+        
+        if 'genre' in request.GET:
+            genres = request.GET['genre'].split(',')
+            products_query = products_query.filter(genre__name__in=genres)
+            genres = Genre.objects.filter(name__in=genres)
+        
+        products = list(products_query)
+
+        if sales:
+            sale = sales.first()
+            for book in sale.books.all():
+                for product in products:
+                    if product.id == book.id:
+                        product.price = self.sale_price(sale.percentage, product.price)
+ 
         query = None
         genres = None
         sort = None
         direction = None
 
-        if request.GET:
-            if 'sort' in request.GET:
-                sortkey = request.GET['sort']
-                sort = sortkey
-                if sortkey == 'title':
-                    sortkey = 'lower_title'
-                    products = products.annotate(lower_title=Lower('title'))
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            reverse = False
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    reverse = True
 
-                if sortkey == 'author':
-                    sortkey = 'lower_authors'
-                    products = products.annotate(
-                        lower_authors=Lower('authors')
-                    )
+            if sortkey == 'title':
+                products.sort(key=self.get_title, reverse=reverse)
 
-                if 'direction' in request.GET:
-                    direction = request.GET['direction']
-                    if direction == 'desc':
-                        sortkey = f'-{sortkey}'
-                products = products.order_by(sortkey)
+            if sortkey == 'authors':
+                products.sort(key=self.get_authors, reverse=reverse)
 
-            if 'genre' in request.GET:
-                genres = request.GET['genre'].split(',')
-                products = products.filter(genre__name__in=genres)
-                genres = Genre.objects.filter(name__in=genres)
-
-            if 'q' in request.GET:
-                query = request.GET['q']
-                if not query:
-                    messages.error(
-                        request,
-                        "You didn't enter any search criteria!"
-                    )
-                    return redirect(reverse('products'))
-
-                queries = (
-                    Q(title__icontains=query)
-                    | Q(authors__icontains=query)
-                    | Q(isbn__icontains=query)
-                    | Q(isbn13__icontains=query)
-                )
-
-                products = products.filter(queries)
+            if sortkey == 'price':
+                products.sort(key=self.get_price, reverse=reverse)
+            
+            if sortkey == 'rating':
+                products.sort(key=self.get_rating, reverse=reverse)
 
         current_sorting = f'{sort}_{direction}'
 
@@ -87,6 +103,21 @@ class AllProducts(View):
         }
 
         return render(request, 'products/products.html', context)
+
+    def sale_price(self, percentage, price):
+        return price * (100 - percentage ) / 100
+
+    def get_price(self, product):
+        return product.price
+
+    def get_authors(self, product):
+        return product.authors.lower()
+
+    def get_title(self, product):
+        return product.title.lower()
+    
+    def get_rating(self, product):
+        return product.rating
 
 
 class ProductDetails(View):
@@ -106,12 +137,25 @@ class ProductDetails(View):
         """
 
         product = get_object_or_404(Product, pk=product_id)
+        sales = Sale.objects.filter(
+            Q(start_date__lte=date.today())
+            & Q(end_date__gte=date.today())
+        )
+
+        if sales:
+            sale = sales.first()
+            for book in sale.books.all():
+                if product.id == book.id:
+                    product.price = self.sale_price(sale.percentage, product.price)
 
         context = {
             'product': product,
         }
 
         return render(request, 'products/product_details.html', context)
+
+    def sale_price(self, percentage, price):
+        return price * (100 - percentage ) / 100
 
 
 class AddProduct(SuperUserMixin, View):

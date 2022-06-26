@@ -9,6 +9,9 @@ from django.contrib import messages
 from django.conf import settings
 import stripe
 import json
+from django.db.models import Q
+from datetime import date
+
 
 # Internal:
 from bag.contexts import bag_contents
@@ -17,6 +20,7 @@ from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from .models import OrderLineItem, Order
 from .forms import OrderForm
+from sale.models import Sale
 
 
 @method_decorator(require_POST, name='dispatch')
@@ -153,6 +157,15 @@ class Checkout(View):
             for item_id, quantity in bag.items():
                 try:
                     product = Product.objects.get(id=item_id[0])
+                    sales = Sale.objects.filter(
+                        Q(start_date__lte=date.today())
+                        & Q(end_date__gte=date.today())
+                    )
+                    if sales:
+                        sale = sales.first()
+                        for book in sale.books.all():
+                            if product.id == book.id:
+                                product.price = self.sale_price(sale.percentage, product.price)
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
@@ -178,6 +191,9 @@ class Checkout(View):
                 'There was an error with your form.\
                 Please double check your information.'
             )
+
+    def sale_price(self, percentage, price):
+        return price * (100 - percentage ) / 100
 
 
 class CheckoutSuccess(View):

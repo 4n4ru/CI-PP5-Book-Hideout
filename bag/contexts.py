@@ -3,9 +3,12 @@
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from decimal import Decimal
+from django.db.models import Q
+from datetime import date
 
 # Internal:
 from products.models import Product
+from sale.models import Sale
 
 
 def bag_contents(request):
@@ -25,6 +28,17 @@ def bag_contents(request):
 
     for item_id, quantity in bag.items():
         product = get_object_or_404(Product, pk=item_id)
+        sales = Sale.objects.filter(
+            Q(start_date__lte=date.today())
+            & Q(end_date__gte=date.today())
+        )
+
+        if sales:
+            sale = sales.first()
+            for book in sale.books.all():
+                if product.id == book.id:
+                    product.price = sale_price(sale.percentage, product.price)
+        
         total += quantity * product.price
         product_count += quantity
         bag_items.append({
@@ -53,3 +67,6 @@ def bag_contents(request):
     }
 
     return context
+
+def sale_price(percentage, price):
+        return price * (100 - percentage ) / 100
