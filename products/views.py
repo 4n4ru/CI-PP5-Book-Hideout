@@ -65,6 +65,7 @@ class AllProducts(View):
             for book in sale.books.all():
                 for product in products:
                     if product.id == book.id:
+                        product.old_price = product.price
                         product.price = self.sale_price(sale.percentage, product.price)
  
         query = None
@@ -146,6 +147,7 @@ class ProductDetails(View):
             sale = sales.first()
             for book in sale.books.all():
                 if product.id == book.id:
+                    product.old_price = product.price
                     product.price = self.sale_price(sale.percentage, product.price)
 
         context = {

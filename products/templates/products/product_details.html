@@ -38,6 +38,9 @@
                 {% else %}
                     <small class="text-muted">No rating</small>
                 {% endif %}
+                {% if product.old_price %}
+                    <small class="text-muted d-block">Was <span class="diagonal-strike">${{ product.old_price }}</span></small>
+                {% endif %}
                 <p class="lead text-left font-weight-bold">${{ product.price}}</p>
             </div>
             <div>
