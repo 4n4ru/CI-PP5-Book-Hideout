@@ -1,7 +1,6 @@
 # Imports:
 # 3rd party:
 from django.db import models
-from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError
 
 # Internal:
@@ -18,10 +17,10 @@ class Sale(models.Model):
         max_digits=2,
         decimal_places=0
     )
-    start_date = models.DateField(
-        validators=[date_not_in_past]
+    start_date = models.DateField()
+    end_date = models.DateField(
+        validators=[date_not_in_past],
     )
-    end_date = models.DateField()
     books = models.ManyToManyField(
         Product,
     )

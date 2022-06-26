@@ -2,6 +2,7 @@
 Models for the products app
 """
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Genre(models.Model):
@@ -74,7 +75,8 @@ class Product(models.Model):
     )
     rating = models.DecimalField(
         max_digits=2,
-        decimal_places=1
+        decimal_places=1,
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
     )
     image_url = models.URLField(
         max_length=1024,
