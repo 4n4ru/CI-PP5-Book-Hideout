@@ -223,7 +223,7 @@ class DeleteProduct(SuperUserMixin, View):
     """
 
     def get(self, request, product_id):
-        """Renders delete product form
+        """Deletes product from database
 
         Args:
             request (object): HTTP request object

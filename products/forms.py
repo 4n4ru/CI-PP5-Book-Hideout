@@ -4,7 +4,7 @@ from django import forms
 
 # Internal:
 from .models import Genre, Product
-from .widgets import CustomClearableFileInput, MyDateInput
+from book_hideout.widgets import CustomClearableFileInput, MyDateInput
 
 
 class ProductForm(forms.ModelForm):
@@ -33,9 +33,8 @@ class ProductForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         genres = Genre.objects.all()
         queryset = [(g.id, g.get_friendly_name()) for g in genres]
-
         self.fields['genre'].choices = queryset
-        for field_name, field in self. fields.items():
+        for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'border-black rounded-0'
         self.fields['isbn'].widget.attrs['pattern'] = r'\d{9}[\dX]'
         self.fields['isbn'].widget.attrs['title'] = 'Please enter a valid \
