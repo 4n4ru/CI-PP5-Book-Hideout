@@ -321,7 +321,7 @@ input[type=number] {
 
 /* item quantity form width */
 .qty-w {
-    width: 75%;
+    width: 120px;
 }
 
 /* diagonal strike through for before sale price from: https://schoberg.net/2020/05/better-strikethrough-strikeout-style-good-for-prices-with-css/*/
@@ -384,11 +384,7 @@ input[type=number] {
     body {
         height: calc(100vh - 135px);
     }
-    /* item quantity form width on smaller devices */
-    .qty-w {
-        width: 100%;
-    }
-
+    
     /* match button width for product details page on smaller devices */
     .btn-w {
         width: 80%;

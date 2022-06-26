@@ -57,15 +57,19 @@ class AllProducts(View):
             genres = request.GET['genre'].split(',')
             products_query = products_query.filter(genre__name__in=genres)
             genres = Genre.objects.filter(name__in=genres)
-        
+
         products = list(products_query)
 
         if sales:
             sale = sales.first()
+            for product in products:
+                product.on_sale = False
             for book in sale.books.all():
                 for product in products:
                     if product.id == book.id:
                         product.old_price = product.price
+                        product.on_sale = True
+                        print(product)
                         product.price = self.sale_price(sale.percentage, product.price)
  
         query = None
@@ -94,6 +98,9 @@ class AllProducts(View):
             if sortkey == 'rating':
                 products.sort(key=self.get_rating, reverse=reverse)
 
+        if 'sale' in request.GET:
+            products = [p for p in products if p.on_sale == True]
+
         current_sorting = f'{sort}_{direction}'
 
         context = {
@@ -106,7 +113,7 @@ class AllProducts(View):
         return render(request, 'products/products.html', context)
 
     def sale_price(self, percentage, price):
-        return price * (100 - percentage ) / 100
+        return round(price * (100 - percentage ) / 100, 2)
 
     def get_price(self, product):
         return product.price
@@ -118,7 +125,7 @@ class AllProducts(View):
         return product.title.lower()
     
     def get_rating(self, product):
-        return product.rating
+        return product.rating          
 
 
 class ProductDetails(View):
@@ -157,7 +164,7 @@ class ProductDetails(View):
         return render(request, 'products/product_details.html', context)
 
     def sale_price(self, percentage, price):
-        return price * (100 - percentage ) / 100
+        return round(price * (100 - percentage ) / 100, 2)
 
 
 class AddProduct(SuperUserMixin, View):

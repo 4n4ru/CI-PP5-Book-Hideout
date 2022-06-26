@@ -193,7 +193,7 @@ class Checkout(View):
             )
 
     def sale_price(self, percentage, price):
-        return price * (100 - percentage ) / 100
+        return round(price * (100 - percentage ) / 100, 2)
 
 
 class CheckoutSuccess(View):

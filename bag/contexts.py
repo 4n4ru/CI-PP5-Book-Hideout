@@ -69,4 +69,4 @@ def bag_contents(request):
     return context
 
 def sale_price(percentage, price):
-        return price * (100 - percentage ) / 100
+        return round(price * (100 - percentage ) / 100, 2)
