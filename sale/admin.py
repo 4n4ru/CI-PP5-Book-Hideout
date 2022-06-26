@@ -8,6 +8,7 @@ from .models import Sale
 
 class SaleAdmin(admin.ModelAdmin):
     list_display = (
+        'name',
         'percentage',
         'start_date',
         'end_date',

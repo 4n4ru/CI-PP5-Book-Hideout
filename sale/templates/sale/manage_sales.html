@@ -27,6 +27,7 @@
             <div class="row py-3">
                 <div class="col-md-5 col-12">
                     <div><strong>{{ sale }}</strong></div>
+                    <div>{{ sale.percentage }}% sale</div>
                     <div>Start: {{ sale.start_date }}</div>
                     <div>End: {{ sale.end_date }}</div>
                 </div>
@@ -39,7 +40,7 @@
                 <div class="col-12 col-md-2">
                     <div class="row">
                         <a href="" class="btn btn-outline-black rounded-0">Edit</a>
-                        <a href="" class="btn btn-black rounded-0">Delete</a>
+                        <a href="{% url 'delete_sale' sale.id %}" class="btn btn-black rounded-0">Delete</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,7 @@
         
             <p>There are currently no sales</p>
         {% endif %}
-            <a href="#" class="btn btn-black rounded-0">Add Sale</a>
+            <a href="{% url 'add_sale' %}" class="btn btn-black rounded-0">Add Sale</a>
         </div>
     </div>
 </div>
