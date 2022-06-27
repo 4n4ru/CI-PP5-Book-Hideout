@@ -4,7 +4,6 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views import View
 from django.contrib import messages
 from django.db.models import Q
-from django.db.models.functions import Lower
 from datetime import date
 
 # Internal:
@@ -52,7 +51,7 @@ class AllProducts(View):
             )
 
             products_query = products_query.filter(queries)
-        
+
         if 'genre' in request.GET:
             genres = request.GET['genre'].split(',')
             products_query = products_query.filter(genre__name__in=genres)
@@ -70,8 +69,11 @@ class AllProducts(View):
                         product.old_price = product.price
                         product.on_sale = True
                         print(product)
-                        product.price = self.sale_price(sale.percentage, product.price)
- 
+                        product.price = self.sale_price(
+                            sale.percentage,
+                            product.price
+                        )
+
         query = None
         genres = None
         sort = None
@@ -80,26 +82,29 @@ class AllProducts(View):
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
-            reverse = False
+            desc = False
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
-                    reverse = True
+                    desc = True
 
             if sortkey == 'title':
-                products.sort(key=self.get_title, reverse=reverse)
+                products.sort(key=self.get_title, reverse=desc)
 
             if sortkey == 'authors':
                 products.sort(key=self.get_authors, reverse=reverse)
 
             if sortkey == 'price':
                 products.sort(key=self.get_price, reverse=reverse)
-            
+
             if sortkey == 'rating':
                 products.sort(key=self.get_rating, reverse=reverse)
 
         if 'sale' in request.GET:
-            products = [p for p in products if p.on_sale == True]
+            if sales:
+                products = [p for p in products if p.on_sale]
+            else:
+                products = []
 
         current_sorting = f'{sort}_{direction}'
 
@@ -113,7 +118,7 @@ class AllProducts(View):
         return render(request, 'products/products.html', context)
 
     def sale_price(self, percentage, price):
-        return round(price * (100 - percentage ) / 100, 2)
+        return round(price * (100 - percentage) / 100, 2)
 
     def get_price(self, product):
         return product.price
@@ -123,9 +128,9 @@ class AllProducts(View):
 
     def get_title(self, product):
         return product.title.lower()
-    
+
     def get_rating(self, product):
-        return product.rating          
+        return product.rating
 
 
 class ProductDetails(View):
@@ -155,7 +160,10 @@ class ProductDetails(View):
             for book in sale.books.all():
                 if product.id == book.id:
                     product.old_price = product.price
-                    product.price = self.sale_price(sale.percentage, product.price)
+                    product.price = self.sale_price(
+                        sale.percentage,
+                        product.price
+                    )
 
         context = {
             'product': product,
@@ -164,7 +172,7 @@ class ProductDetails(View):
         return render(request, 'products/product_details.html', context)
 
     def sale_price(self, percentage, price):
-        return round(price * (100 - percentage ) / 100, 2)
+        return round(price * (100 - percentage) / 100, 2)
 
 
 class AddProduct(SuperUserMixin, View):

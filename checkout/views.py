@@ -165,7 +165,10 @@ class Checkout(View):
                         sale = sales.first()
                         for book in sale.books.all():
                             if product.id == book.id:
-                                product.price = self.sale_price(sale.percentage, product.price)
+                                product.price = self.sale_price(
+                                    sale.percentage,
+                                    product.price
+                                )
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
@@ -193,7 +196,7 @@ class Checkout(View):
             )
 
     def sale_price(self, percentage, price):
-        return round(price * (100 - percentage ) / 100, 2)
+        return round(price * (100 - percentage) / 100, 2)
 
 
 class CheckoutSuccess(View):

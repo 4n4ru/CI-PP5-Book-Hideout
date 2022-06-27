@@ -38,7 +38,7 @@ def bag_contents(request):
             for book in sale.books.all():
                 if product.id == book.id:
                     product.price = sale_price(sale.percentage, product.price)
-        
+
         total += quantity * product.price
         product_count += quantity
         bag_items.append({
@@ -68,5 +68,6 @@ def bag_contents(request):
 
     return context
 
+
 def sale_price(percentage, price):
-        return round(price * (100 - percentage ) / 100, 2)
+    return round(price * (100 - percentage) / 100, 2)

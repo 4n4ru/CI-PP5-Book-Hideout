@@ -1,6 +1,7 @@
 from datetime import date
 from django.core.exceptions import ValidationError
 
+
 def date_not_in_past(date_to_check):
     """Validate if the date to be checked is in the past, if it is, raise
     validation error

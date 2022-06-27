@@ -17,6 +17,5 @@ class SaleAdmin(admin.ModelAdmin):
     ordering = ('start_date',)
 
 
-
 # Register your models here.
 admin.site.register(Sale, SaleAdmin)

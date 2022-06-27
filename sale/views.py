@@ -43,7 +43,7 @@ class AddSale(SuperUserMixin, View):
             method: renders add sale form
         """
         return render(request, self.template, self.context)
-    
+
     def post(self, request):
         """Handles post method of add sale form
 
@@ -55,7 +55,7 @@ class AddSale(SuperUserMixin, View):
         """
         form = SaleForm(request.POST, request.FILES)
         if form.is_valid():
-            sale = form.save()
+            form.save()
             messages.success(request, 'The sale was successfully added')
             return redirect(reverse('manage'))
         else:
@@ -74,7 +74,7 @@ class DeleteSale(SuperUserMixin, View):
     """
 
     def get(self, request, sale_id):
-        """Deletes sale from database 
+        """Deletes sale from database
 
         Args:
             request (object): HTTP request object
@@ -89,6 +89,7 @@ class DeleteSale(SuperUserMixin, View):
             f'You deleted {sale.name}'
         )
         return redirect(reverse('manage'))
+
 
 class EditSale(SuperUserMixin, View):
     """A view to display edit sale template and edit sales in database

@@ -31,20 +31,19 @@ class Sale(models.Model):
     def clean(self):
         super().clean()
         if not (self.start_date < self.end_date):
-            raise ValidationError({'end_date':[
+            raise ValidationError({'end_date': [
                 'The end date needs to be after the start date.'
-            ],})
-        
+            ], })
+
         sales = Sale.objects.all()
         for sale in sales:
             start_date = sale.start_date
             end_date = sale.end_date
             if (self.start_date >= start_date and self.start_date <= end_date):
-                raise ValidationError({'start_date':[
+                raise ValidationError({'start_date': [
                     f'You already have a sale ({sale}) during this period.'
-                ],})
+                ], })
             elif (self.end_date >= start_date and self.end_date <= end_date):
-                raise ValidationError({'end_date':[
+                raise ValidationError({'end_date': [
                     f'You already have a sale ({sale}) during this period.'
-                ],})
-
+                ], })
