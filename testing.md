@@ -30,6 +30,10 @@
 * Account icon
     * Expected: Account icon reflects login status of user 
     * Works: YES
+* Lower navbar
+    * Expected: Clicking links on the lower navbar filters or sorts the products in a relevant maner
+    * Works: YES
+
 ### Products page
 * Product details
     * Expected: Clicking on product image takes the user to the products detail page
@@ -38,56 +42,86 @@
     * Expected: Number of products in the upper left corner reflects number of products displayed on page
     * Works: YES
 * Sort by
-    * Expected: Selecting a sort option in the upper right corner will sort the products in the selected maner
+    * Expected: Selecting a sort option in the upper right corner will sort the products in the selected manner
+    * Works: YES
+* Edit and delete links
+    * Expected: Edit and delete buttons below each product can be seen by a logged-in superuser but not by other users
+    * Works: YES
+* Sale prices
+    * Expected: If an item is on sale, the old price is struck through and the sale price is displayed 
     * Works: YES
 
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-    * Expected: 
-    * Works:
-
-
-
-* A list of all products is visible to shoppers
-    * Expected: The products page displays all products to users logged in and out
+### Product details page
+* Information about product
+    * Expected: Information about a product is clear and well layed out
     * Works: YES
-* Details view for book 
-    * Expected: Clicking on a book opens product on new page showing all info about that book
+* Add to basket button
+    * Expected: Clicking add to basked button results in adding item to basket, showing success message and total on basket and updating basket summary in basket preview
     * Works: YES
-* A basket icon in the navbar that holds the current total in your basket
-    * Expected: Each time an item is added / taken from the shopping basket the total displayed on the page updates also
+* Keep shopping button
+    * Expected: Takes the user back to the all products overview
     * Works: YES
-* Straight forward registration page
-    * Expected: Registration page is simple and details are remembered for future use
+* Edit and delete links
+    * Expected: Edit and delete buttons over the quantity form can be seen by a logged-in superuser but not by others
+    * Works: YES
+* Quantity form
+    * Expected: User can adjust the quantity of the product to be added to the basket using the quantity form
+    * Works: YES
+* Genre links
+    * Expected: Clicking on a genre link will bring the user to the all products page with the genre relevant genre link active. Only books of the selected genre are visible
+    * Works: YES
+
+### Shopping basket page
+* Shopping basket icon
+    * Expected: Clicking the shopping basket icon brings the user to an overview of the current basket content
+    * Works: YES
+* Quantity form and update link
+    * Expected: Adjusting the quantity and clicking the update link will adjust the basket content. The change will be reflected in the subtotal and grand total.
+    * Works: YES
+* Remove link
+    * Expected: Removes item from basket. The change will be reflected in the grand total and the item disappears from the list.
+    * Works: YES
+* Keep shopping button
+    * Expected: Takes the user back to the all products overview
+    * Works: YES
+* Secure checkout button
+    * Expected: Takes the user to a checkout page 
+    * Works: YES
+
+### Checkout page
+* Checkout form
+    * Expected: The user sees a form to fill it with shipping and payment information, if the user is logged in and has previously saved his info, the form is pre-filled
+    * Works: YES
+* Form validation
+    * Expected: If the user enters invalid data to the checkout form, the form is not submitted and information about the error is given
+    * Works: YES
+* Save delivery information option
+    * Expected: Logged in user sees a checkbox to save info to their profile. Other users see links to sign-up and login page
+    * Works: YES
+* Edit basket button
+    * Expected: Takes the user back to the shopping basked page
+    * Works: YES
+* Complete order button
+    * Expected: Completes the order, payment is taken, user is given an order confirmation. Order confirmation is also sent to the email provided in the checkout form and saved in the order history. A success message is displayed
+    * Works: YES
+* Order summary
+    * Expected: A summary of all the items to be purchased is displayed including grand total 
+    * Works: YES
+
+### Checkout success page
+* Order confirmation
+    * Expected: Oder confirmation is displayed
+    * Works: YES
+
+### Account pages
+* Sign-up form 
+    * Expected: Filling the form and clicking the Sign Up button creates a new user. A confirmation email is send to the email used in the form
     * Works: YES
 * Email registration confirmation Email
     * Expected: After a user registers they are sent an email to confirm that email address
     * Works: YES
-* Each registered user gets a profile
-    * Expected: When a user registers a profile is created with their name on it
-    * Works: YES
 * Sign in button
-    * Expected: There is a sign in button which brings user to login page - visible when logged out and isn't visible when users are logged in 
+    * Expected: There is a sign in button which brings user to login page - visible when logged out and isn't visible when users are logged in
     * Works: YES
 * Logout button
     * Expected: When clicked it takes user to logout page. Visible when logged in, not visible when logged out.
@@ -95,60 +129,84 @@
 * Forgot password link 
     * Expected: When user clicks the forgot password button, an email is sent to their registered email address
     * Works: YES
-* Search bar in navbar
-    * Expected: When user types in a search term, results are displayed
+
+### User profile page
+* My profile link
+    * Expected: Clicking the my profile link in the dropdown of the account link brings the user to their profile
     * Works: YES
-* Search results
-    * Expected: User's search term is displayed on the page, as well as how many hits it got
+* My profile page
+    * Expected: Displays users default delivery information and order history
     * Works: YES
-* Sort button on product pages
-    * Expected: Sort button works in direction selected and by type selected
+* Update information
+    * Expected: Clicking the update information button renders a form to update the delivery information pre-filled with the current delivery information. Submitting the form updates the delivery information
     * Works: YES
-* Products split into turtles, merchandise and donations in navbar
-    * Expected: Each link in the lower navbar (turtles, mech, donations) filters all products by the category selected
+* Order number link
+    * Expected: Clicking on the order number links displays a past order confirmation for the selected order
     * Works: YES
-* Non turtle items have a + and - button to change quantity
-    * Expected: For merchandise and donations there is a quantity selector on the details and basket pages. 
+
+### Product management
+* Product management link
+    * Expected: A signed in superuser can see a product management link in the account dropdown. Clicking on the link takes the user to a add product page
     * Works: YES
-* View the basket 
-    * Expected: When users click the basket icon it brings them to their basket, which shows the items they selected in the quantities they selected and the cost.
+* Add product page
+    * Expected: Displays a form to fill in with the details for a new product
     * Works: YES
-* Merch and donate view has quantity selector, turtles do not
-    * Expected: Users can input between 1 and 99 quantity of any merchandise or donation item. Users can only select one turtle.
-    * Works: Mostly! Some bugs with users being able to repeatedly add the same turtle to their basket.
-* Straightforward checkout
-    * Expected: Users only need to input vital information. Card details section is simple and short.
+* Change image button
+    * Expected: Clicking the button takes the user to a open dialog and enables them to pick an image for the product
+    * Works: NO - user is able to pick an image, but the image is not displayed in the all products page or product details page 
+* Add image by URL
+    * Expected: After adding url to image and submitting add book form, image is visible on all products page and product details page
+    * Works: NO
+* Form validation
+    * Expected: If the user enters invalid data to the add book form, the form is not submitted and information about the error is given
     * Works: YES
-* When order is placed successfully, email is sent to the email supplied at checkout with order details
-    * Expected: User receives email after successful purchase thanking them for their order and giving some details of it
+* Add book button
+    * Expected: Clicking the button submits the add book form, a new product is created, a success message is displayed, the user is redirected to the product details page of the book just created
     * Works: YES
-* Order history is displayed on user's profile
-    * Expected: Users can see the items they have previously bought on their profile page
+* Cancel button
+    * Expected: Takes the user back to the all products page
     * Works: YES
-* Add product form
-    * Expected: Admin can add products to the page from the front end
+* Edit book link
+    * Expected: Clicking the edit book link in the all products or products details page takes the user to an edit product page
     * Works: YES
-* Edit button on products which allows owner to edit the details of the product
-    * Expected: The edit button allows owner to edit the items on the page
+* Edit product page
+    * Expected: Displays a form to update the product details pre-filled with the data for the selected product 
     * Works: YES
-* Admin can delete products from page
-    * Expected: Owners can delete products from the page
+* Change image button
+    * Expected: Clicking the button takes the user to a open dialog and enables them to pick an image for the product
+    * Works: NO - user is able to pick an image, but the image is not displayed in the all products page or product details page 
+* Add image by URL
+    * Expected: After adding url to image and submitting edit book form, image is visible on all products page and product details page
+    * Works: NO
+* Delete book option
+    * Expected: Clicking delete button on all products page or product details page displays a modal with a delete confirmation, clicking yes deletes the relevant product
     * Works: YES
-* Admin can use add product form to add turtles
-    * Expected: Owner can use the add product form to add turtles to the store
+
+### Sales management
+* Sales management link
+    * Expected: A signed in superuser can see a sales management link in the account dropdown. Clicking on the link takes the user to a sales overview page
     * Works: YES
-* Admin can click the edit button to edit details about each turtle
-    * Expected: Clicking edit allows owner to change information about the turtles
+* Sales management page
+    * Expected: An overview page that shows a list of all the sales that are currently in the database
     * Works: YES
-* Admin can delete any turtle from the website
-    * Expected: Admin can remove turtles from the webpage using the delete button
+* Add sale button
+    * Expected: Takes the user to the add sale page
+    * Works: YES 
+* Add sale page
+    * Expected: Displays a form to fill in with the details for a new sale
     * Works: YES
-* Contact form on page
-    * Expected: When user uses contact form their message is sent to the database, they receive a confirmation message to the page and an email is sent to admin to say the contact form was used
+* Form validation
+    * Expected: If the user enters invalid data to the add book form, the form is not submitted and information about the error is given. The user cannot create a sale that overlaps with another sale
     * Works: YES
-* Functional newsletter signup
-    * Expected: If user enters their email address into the newsletter signup they get a confirmation message displayed on the page and their info added to mailchimp directory. If they try reenter their email they get a message saying they already signed up
+* Add sale button
+    * Expected: Clicking the button submits the add sale form, a new sale is created, a success message is displayed, the user is redirected to the sales management page
     * Works: YES
-* Social media links on page - leads to home pages of those sites
-    * Expected: Social media link leads to the corresponding home page of that site
+* Cancel button
+    * Expected: Takes the user back to the sales management page
+    * Works: YES
+* Edit button
+    * Expected: Clicking the edit button in the sales management page takes the user to an edit sale page
+    * Works: YES
+* Delete button
+    * Expected: Clicking the delete button deletes the relevant sale
     * Works: YES
