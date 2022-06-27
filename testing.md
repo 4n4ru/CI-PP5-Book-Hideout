@@ -34,7 +34,7 @@
     * Expected: Clicking links on the lower navbar filters or sorts the products in a relevant maner
     * Works: YES
 
-### Products page
+### Products page:
 * Product details
     * Expected: Clicking on product image takes the user to the products detail page
     * Works: YES
@@ -51,7 +51,7 @@
     * Expected: If an item is on sale, the old price is struck through and the sale price is displayed 
     * Works: YES
 
-### Product details page
+### Product details page:
 * Information about product
     * Expected: Information about a product is clear and well layed out
     * Works: YES
@@ -71,7 +71,7 @@
     * Expected: Clicking on a genre link will bring the user to the all products page with the genre relevant genre link active. Only books of the selected genre are visible
     * Works: YES
 
-### Shopping basket page
+### Shopping basket page:
 * Shopping basket icon
     * Expected: Clicking the shopping basket icon brings the user to an overview of the current basket content
     * Works: YES
@@ -88,7 +88,7 @@
     * Expected: Takes the user to a checkout page 
     * Works: YES
 
-### Checkout page
+### Checkout page:
 * Checkout form
     * Expected: The user sees a form to fill it with shipping and payment information, if the user is logged in and has previously saved his info, the form is pre-filled
     * Works: YES
@@ -108,16 +108,16 @@
     * Expected: A summary of all the items to be purchased is displayed including grand total 
     * Works: YES
 
-### Checkout success page
+### Checkout success page:
 * Order confirmation
     * Expected: Oder confirmation is displayed
     * Works: YES
 
-### Account pages
+### Account pages:
 * Sign-up form 
     * Expected: Filling the form and clicking the Sign Up button creates a new user. A confirmation email is send to the email used in the form
     * Works: YES
-* Email registration confirmation Email
+* Registration confirmation email
     * Expected: After a user registers they are sent an email to confirm that email address
     * Works: YES
 * Sign in button
@@ -130,7 +130,7 @@
     * Expected: When user clicks the forgot password button, an email is sent to their registered email address
     * Works: YES
 
-### User profile page
+### User profile page:
 * My profile link
     * Expected: Clicking the my profile link in the dropdown of the account link brings the user to their profile
     * Works: YES
@@ -144,7 +144,7 @@
     * Expected: Clicking on the order number links displays a past order confirmation for the selected order
     * Works: YES
 
-### Product management
+### Product management:
 * Product management link
     * Expected: A signed in superuser can see a product management link in the account dropdown. Clicking on the link takes the user to a add product page
     * Works: YES
@@ -182,7 +182,7 @@
     * Expected: Clicking delete button on all products page or product details page displays a modal with a delete confirmation, clicking yes deletes the relevant product
     * Works: YES
 
-### Sales management
+### Sales management:
 * Sales management link
     * Expected: A signed in superuser can see a sales management link in the account dropdown. Clicking on the link takes the user to a sales overview page
     * Works: YES
