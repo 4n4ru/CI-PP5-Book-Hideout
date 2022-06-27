@@ -92,13 +92,13 @@ class AllProducts(View):
                 products.sort(key=self.get_title, reverse=desc)
 
             if sortkey == 'authors':
-                products.sort(key=self.get_authors, reverse=reverse)
+                products.sort(key=self.get_authors, reverse=desc)
 
             if sortkey == 'price':
-                products.sort(key=self.get_price, reverse=reverse)
+                products.sort(key=self.get_price, reverse=desc)
 
             if sortkey == 'rating':
-                products.sort(key=self.get_rating, reverse=reverse)
+                products.sort(key=self.get_rating, reverse=desc)
 
         if 'sale' in request.GET:
             if sales:
