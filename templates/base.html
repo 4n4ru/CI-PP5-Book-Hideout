@@ -144,11 +144,13 @@
         </div>
         {% endif %}
 
+        
         {% block page_header %}
         {% endblock %}
-
-        {% block content%}
-        {% endblock %}
+        <main class="flex-fill">
+          {% block content%}
+          {% endblock %}
+        </main>
 
         <footer class="container-fluid bg-black p-3 text-white">
           <div class="container quotes-container content-container">

@@ -2,12 +2,22 @@ html {
     height: 100%;
 }
 
+/* Make page stretch at least 100vh to avoid whitespace below footer, 
+code taken from https://forum.freecodecamp.org/t/footer-white-space-below/191360/4 */
 body {
     background: url('../../media/homepage_background.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     color: #555;
     font-family: 'Lato';
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-fill {
+    flex: 1 1 auto;
 }
 
 /* from Bulma */
