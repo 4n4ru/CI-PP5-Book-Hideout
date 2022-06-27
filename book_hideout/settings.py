@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # Get debug from environment
-DEBUG = os.environ.get('DEBUG')
+DEBUG = development
 
 # settings depending if project is in development or not
 if development:
