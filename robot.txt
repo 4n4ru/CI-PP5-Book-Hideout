@@ -1,0 +1,5 @@
+
+User-agent: *
+Disallow: /accounts/
+Disallow: /bag/
+sitemap: https://ci-pp5-bookhideout.herokuapp.com/sitemap.xml
