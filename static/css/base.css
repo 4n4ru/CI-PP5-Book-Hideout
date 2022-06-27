@@ -345,6 +345,11 @@ input[type=number] {
     transform: rotate(-15deg);
 }
 
+/* Mailchimp */
+#mc_embed_signup form{
+    padding: 0;
+}
+
 
 /* ------ Media Queries ----- */
 
